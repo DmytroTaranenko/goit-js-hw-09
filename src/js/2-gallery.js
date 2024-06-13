@@ -23,11 +23,16 @@ window.addEventListener('DOMContentLoaded', e => {
 
 form.addEventListener('submit', e => {
     e.preventDefault()
+    if (form.email.value === '' || !form.message.value === '') {
+    alert('Fill please all fields');
+    return;
+  }
     const formData = new FormData(form)
     const email = formData.get('email')
     const message = formData.get('message')
     const data = { email, message }
     form.reset()
+    console.log(data);
     localStorage.removeItem(STORAGE_KEY)
 });
 
