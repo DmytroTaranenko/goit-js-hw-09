@@ -8,11 +8,12 @@ const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', e => {
     e.preventDefault();
-    const formData = new FormData(form)
-    const email = formData.get('email')
-    const message = formData.get('message')
-    const data = { email, message }
-    saveToLS(STORAGE_KEY, data);
+    const userFormData = new FormData(form)
+    const email = userFormData.get('email')
+    const message = userFormData.get('message')
+    formData.email = email;
+    formData.message = message;
+    saveToLS(STORAGE_KEY, formData);
 });
 
 window.addEventListener('DOMContentLoaded', e => {
@@ -23,16 +24,17 @@ window.addEventListener('DOMContentLoaded', e => {
 
 form.addEventListener('submit', e => {
     e.preventDefault()
-    if (form.email.value === '' || !form.message.value === '') {
+    if (form.email.value === '' || form.message.value === '') {
     alert('Fill please all fields');
     return;
   }
-    const formData = new FormData(form)
-    const email = formData.get('email')
-    const message = formData.get('message')
-    const data = { email, message }
+    const userFormData = new FormData(form)
+    const email = userFormData.get('email')
+    const message = userFormData.get('message')
+    formData.email = email
+    formData.message = message
+    console.log(formData);
     form.reset()
-    console.log(data);
     localStorage.removeItem(STORAGE_KEY)
 });
 
