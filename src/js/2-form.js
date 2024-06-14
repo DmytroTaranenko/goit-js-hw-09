@@ -29,13 +29,15 @@ form.addEventListener('submit', e => {
     return;
   }
     const userFormData = new FormData(form)
-    const email = userFormData.get('email')
-    const message = userFormData.get('message')
+    const email = userFormData.get('email').trim()
+    const message = userFormData.get('message').trim()
     formData.email = email
     formData.message = message
-    console.log(formData);
     form.reset()
+    console.log(formData);
     localStorage.removeItem(STORAGE_KEY)
+    formData.email = ''
+    formData.message = ''
 });
 
 
